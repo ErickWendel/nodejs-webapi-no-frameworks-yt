@@ -1,0 +1,10 @@
+mkdir webapi
+    mkdir database
+        data.json
+
+    mkdir src
+        mkdir entities
+        mkdir repositories
+        mkdir services
+        index.js
+        
