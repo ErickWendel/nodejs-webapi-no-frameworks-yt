@@ -7,6 +7,7 @@ const Factory = require('./factories/heroFactory')
 const heroService = Factory.generateInstance()
 const PORT = 3000
 const DEFAULT_HEADER = { 'Content-Type': 'application/json' }
+
 const routes = {
     '/heroes:get': async (request, response) => {
         const { id } = request.queryString
@@ -16,7 +17,7 @@ const routes = {
         return response.end()
     },
     '/heroes:post': async (request, response) => {
-
+        // entende como outro contexto, entao erro aqui dentro nao é pego pelo contexto maior
         for await (const data of request) {
             try {
                 // await Promise.reject('erro!!!')
@@ -34,10 +35,12 @@ const routes = {
                 
                 response.writeHead(201, DEFAULT_HEADER)
                 response.write(JSON.stringify({ success: 'User Created has succeeded!', id }))
-
+                
+                // só jogamos o retorno pois sabemos que é um objeto body por requisicao
+                // se fosse um arquivo, ele poderia chamar mais de uma vez, aí removeriamos o return
                 return response.end()
             } catch (error) {
-                handleError(response)(error)
+                return handleError(response)(error)
             }
         }
 
@@ -67,9 +70,11 @@ const handler = function (request, response) {
 
     const key = `/${route}:${method.toLowerCase()}`
 
-    const chosen = routes[key]
+    const chosen = routes[key] || routes.default
+    
     response.writeHead(200, DEFAULT_HEADER)
-
+    
+    // handler nao manipula promises!
     return chosen(request, response).catch(handleError(response))
 }
 

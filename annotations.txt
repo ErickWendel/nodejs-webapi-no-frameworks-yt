@@ -6,5 +6,50 @@ mkdir webapi
         mkdir entities
         mkdir repositories
         mkdir services
+        mkdir factories
         index.js
         
+    heroRepository
+        all
+        remove test item from data.json
+    heroService
+        all
+    heroFactory
+        all 
+    entities/hero 
+        all 
+    
+    index.js
+        handler 
+            response.end('Hello')
+        
+        http.createServer
+        routes
+            default
+    run curl localhost:3000
+        routes
+            /heroes:get
+    script.sh 
+        first2
+    run script.sh 
+    script.sh 
+        wrong data
+    routes 
+        /heroes:post
+    run script.sh 
+    script.sh
+        add creating batman
+    run script.sh
+    script.sh 
+        add requesting batman 
+    index.js 
+        add handleError 
+        add /heroes:post 
+            await Promise.reject('/heroes:post')
+        add /heroes:get
+            await Promise.reject('/heroes:post')
+    run script.sh 
+    index.js 
+        change heroes:post 
+            add trycatch
+    run script

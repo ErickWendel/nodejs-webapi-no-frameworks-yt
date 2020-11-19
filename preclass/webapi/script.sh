@@ -19,6 +19,6 @@ echo $CREATE
 
 ID=$(echo $CREATE | jq .id)
 
-echo '\n\n requesting all heroes'
+echo '\n\n requesting batman'
 curl --silent localhost:3000/heroes/$ID
 
